@@ -4,7 +4,7 @@ const Alexa = require('alexa-sdk');
 // You can find this value at the top of your skill's page on http://developer.amazon.com.
 // Make sure to enclose your value in quotes,
 // like this: const APP_ID = 'amzn1.ask.skill.bb4045e6-b3e8-4133-b650-72923c5980f1';
-const APP_ID = 'amzn1.ask.skill.bb4045e6-b3e8-4133-b650-72923c5980f1';
+const APP_ID = 'amzn1.ask.skill.b3521eab-2983-42cf-8f08-65e4155ac90d';
 
 const handlers = {
   'LaunchRequest': function () {
