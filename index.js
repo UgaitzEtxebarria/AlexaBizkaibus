@@ -6,6 +6,7 @@ var app = new alexa.app('alexa-skill-bizkaibus');
 
 
 app.launch( function(request, response) {
+    console.log('Example app listening on port 3000!');
     response.say('Welcome to your alexa skill')
     .reprompt('Ask alexa to say hello world!')
     .shouldEndSession(false);
