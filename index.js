@@ -1,7 +1,6 @@
 module.change_code = 1;
 'use strict';
 
-var weather = require('weather-js');
 var alexa = require('alexa-app');
 var app = new alexa.app('hello_world');
 
@@ -20,7 +19,7 @@ app.error = function(exception, request, response) {
     response.say('Sorry an error occured ' + error.message);
 };
 
-app.intent('sayHelloWorld',
+app.intent('proximo_bus',
   {
     "utterances":[ 
         "say hello world",
