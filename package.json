@@ -1,8 +1,12 @@
 {
-  "name": "alexa-skill-what-did-i-learn",
+  "name": "alexa-skill-bizkaibus",
   "version": "1.0.0",
+  "engines": {
+    "node": "12.13.0"
+  },
   "private": true,
   "dependencies": {
-    "alexa-sdk": "^1.0.25"
+    "alexa-sdk": "^1.0.25",
+    "express": "3.x"
   }
 }
