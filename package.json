@@ -6,7 +6,7 @@
   },
   "private": true,
   "dependencies": {
-    "alexa-sdk": "^1.0.25",
+    "alexa-app": "^4.2.3",
     "express": "3.x"
   }
 }
