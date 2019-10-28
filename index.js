@@ -1,42 +1,62 @@
-const LaunchRequestHandler = {
-  canHandle(handlerInput) {
-      return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
-  },
-  handle(handlerInput) {
-      const speechText = 'Welcome to the Alexa Skills Kit, you can say hello!';
-return handlerInput.responseBuilder
-          .speak(speechText)
-          .reprompt(speechText)
-          .withSimpleCard('Hello World', speechText)
-          .getResponse();
-  }
-};
+module.change_code = 1;
+'use strict';
 
-const HelloWorldIntentHandler = {
-  canHandle(handlerInput) {
-      return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-          && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent';
-  },
-  handle(handlerInput) {
-      const speechText = 'Hello World!';
-return handlerInput.responseBuilder
-          .speak(speechText)
-          .withSimpleCard('Hello World', speechText)
-          .getResponse();
-  }
-};
+var weather = require('weather-js');
+var alexa = require('alexa-app');
+var app = new alexa.app('hello_world');
 
 
-const proximo_autobus = {
-  canHandle(handlerInput) {
-      return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-          && handlerInput.requestEnvelope.request.intent.name === 'proximo_autobus';
-  },
-  handle(handlerInput) {
-      const speechText = 'Hello World!';
-return handlerInput.responseBuilder
-          .speak(speechText)
-          .withSimpleCard('Hello World', speechText)
-          .getResponse();
-  }
+app.launch( function(request, response) {
+    response.say('Welcome to your alexa skill')
+    .reprompt('Ask alexa to say hello world!')
+    .shouldEndSession(false);
+} );
+
+
+app.error = function(exception, request, response) {
+    console.log(exception)
+    console.log(request);
+    console.log(response);  
+    response.say('Sorry an error occured ' + error.message);
 };
+
+app.intent('sayHelloWorld',
+  {
+    "utterances":[ 
+        "say hello world",
+        "tell me hello world"]
+  },
+  function(request,response) {
+    response.say("Hello, world!");
+  }
+);
+
+app.intent('sayWeather',
+  {
+    "slots" : {"city" : "AMAZON.US_CITY"},
+    "utterances":[ 
+        "what is the weather in {-|city}",
+        "tell me the weather in {-|city}",
+        "how is the weather in {-|city}"]
+  },
+  function(request,response) {
+    var city = request.slot("city");
+    return new Promise(function(resolve, reject) {
+      weather.find({search: city, degreeType: 'C'}, (err, result) => {
+        console.log("The city requested is " + city);
+        if(err || result.length == 0) {
+          response.say("The weather in " + city + " could not be found!").send();
+          resolve();
+        } else {
+          var forecast = result[1].current.temperature;
+          var location = result[0].location.name;
+          response.say("The weather in " + location + " is " + forecast + " degrees celsius").send();
+          resolve();
+        }
+      });
+    });
+  }
+);6705,61
+
+
+module.exports = app;
