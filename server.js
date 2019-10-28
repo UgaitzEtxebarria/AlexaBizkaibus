@@ -1,6 +1,6 @@
 'use strict';
 
-var AlexaAppServer = require('alexa-skill-bizkaibus');
+var AlexaAppServer = require('alexa-app-server');
 
 var server = new AlexaAppServer( {
 	httpsEnabled: false,
