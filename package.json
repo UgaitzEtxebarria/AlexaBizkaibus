@@ -9,5 +9,8 @@
     "alexa-app": "^4.2.3",
     "alexa-app-server": "^3.0.2",
     "express": "3.x"
+  },
+  "devDependencies": {
+    "coveralls": "^3.0.7"
   }
 }
