@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/UgaitzEtxebarria/AlexaBizkaibus/issues"
   },
-  "homepage": "https://github.com/UgaitzEtxebarria/AlexaBizkaibus#readme"
+  "homepage": "https://github.com/UgaitzEtxebarria/AlexaBizkaibus#readme",
+  "dependencies": {
+    "alexa-app": "^4.2.3"
+  }
 }
