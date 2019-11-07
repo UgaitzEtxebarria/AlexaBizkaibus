@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/UgaitzEtxebarria/AlexaBizkaibus#readme",
   "dependencies": {
-    "alexa-app": "^4.2.3"
+    "alexa-app": "^4.2.3",
+    "alexa-app-server": "^3.0.2"
   }
 }
