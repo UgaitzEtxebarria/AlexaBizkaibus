@@ -1,0 +1,19 @@
+{
+  "name": "alexabizkaibus",
+  "version": "1.0.0",
+  "description": "Alexa skill for Bizkaibus",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UgaitzEtxebarria/AlexaBizkaibus.git"
+  },
+  "author": "Ugaitz Etxebarria",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UgaitzEtxebarria/AlexaBizkaibus/issues"
+  },
+  "homepage": "https://github.com/UgaitzEtxebarria/AlexaBizkaibus#readme"
+}
