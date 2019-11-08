@@ -19,5 +19,6 @@
   "dependencies": {
     "alexa-app": "^4.2.3",
     "alexa-app-server": "^3.0.2"
-  }
+  },
+  "devDependencies": {}
 }
