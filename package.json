@@ -1,0 +1,25 @@
+{
+  "name": "alexaserver",
+  "version": "1.0.0",
+  "description": "Server for alexa skills",
+  "main": "server.js",
+  "dependencies": {
+    "alexa-app": "^4.2.3",
+    "alexa-app-server": "^3.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UgaitzEtxebarria/AlexaServer.git"
+  },
+  "author": "Ugaitz Etxebarria Iñarra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UgaitzEtxebarria/AlexaServer/issues"
+  },
+  "homepage": "https://github.com/UgaitzEtxebarria/AlexaServer#readme"
+}
