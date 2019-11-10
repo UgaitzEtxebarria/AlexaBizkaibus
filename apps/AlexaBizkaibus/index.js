@@ -21,14 +21,13 @@ app.intent('proximo_autobus',
   {
     "slots":{"number":"NUMBER"}
 	,"utterances":[ 
-		"say the number {1-100|number}",
-		"give me the number {1-100|number}",
-		"tell me the number {1-100|number}",
-		"I want to hear you say the number {1-100|number}"]
+		"Cuando llega el siguiente autobus",
+		"Cual es el siguiente bus",
+		"El proximo bus"]
   },
   function(request,response) {
     var number = request.slot('number');
-    response.say("You asked for the number "+number);
+    response.say("No me han programado para entender eso, lo siento");
   }
 );
 
