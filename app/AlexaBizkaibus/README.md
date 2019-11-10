@@ -1,1 +1,0 @@
-Alexa skill for Bizkaibus
