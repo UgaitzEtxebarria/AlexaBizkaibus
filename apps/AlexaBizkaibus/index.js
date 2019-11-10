@@ -19,15 +19,15 @@ app.error = function( exception, request, response ) {
 
 app.intent('proximo_autobus',
   {
-    "slots":{"number":"NUMBER"}
-	,"utterances":[ 
+    //"slots":{"number":"NUMBER"},
+	"utterances":[ 
 		"Cuando llega el siguiente autobus",
 		"Cual es el siguiente bus",
 		"El proximo bus"]
   },
   function(request,response) {
-    var number = request.slot('number');
-    response.say("No me han programado para entender eso, lo siento");
+    //var number = request.slot('number');
+    response.say("No me han programado para entender eso, lo siendo");
   }
 );
 
