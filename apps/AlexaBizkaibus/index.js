@@ -27,7 +27,7 @@ app.intent('proximo_autobus',
   },
   function(request,response) {
     //var number = request.slot('number');
-    response.say("No me han programado para entender eso, lo siendo");
+    response.say("Cuando llegue!");
   }
 );
 
