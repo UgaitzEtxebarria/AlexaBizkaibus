@@ -31,4 +31,22 @@ app.intent('proximo_autobus',
   }
 );
 
+app.intent("AMAZON.StopIntent", {
+    "slots": {},
+    "utterances": []
+  }, function(request, response) {
+    var stopOutput = "Don't You Worry. I'll be back.";
+    response.say(stopOutput);
+  }
+);
+ 
+app.intent("AMAZON.CancelIntent", {
+    "slots": {},
+    "utterances": []
+  }, function(request, response) {
+    var cancelOutput = "No problem. Request cancelled.";
+    response.say(cancelOutput);
+  }
+);
+
 module.exports = app;
