@@ -1,6 +1,8 @@
 'use strict';
 
 var AlexaAppServer = require('alexa-app-server');
+
+console.log("Pre");
 const { ExpressAdapter } = require('ask-sdk-express-adapter');
  
 var server = new AlexaAppServer({
