@@ -6,6 +6,7 @@
   "dependencies": {
     "alexa-app": "^4.2.3",
     "alexa-app-server": "^3.0.2",
+    "ask-sdk-core": "^2.7.0",
     "ask-sdk-express-adapter": "^2.0.0"
   },
   "devDependencies": {},
