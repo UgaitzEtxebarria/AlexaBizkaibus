@@ -11,6 +11,10 @@ var server = new AlexaAppServer({
   port: process.env.PORT || 8080                  // Port to use
 });
 
+const skillBuilder = Alexa.SkillBuilders.custom();
+const skill = skillBuilder.create();
+const adapter = new ExpressAdapter(skill, true, true);
+
 server.post('/', adapter.getRequestHandlers());
 
 server.start();
