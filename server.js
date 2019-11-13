@@ -1,5 +1,6 @@
 'use strict';
 
+const express = require('express');
 var AlexaAppServer = require('alexa-app-server');
 /*const { Core } = require('ask-sdk-core');
 console.log("Pre");
@@ -12,6 +13,8 @@ var server = new AlexaAppServer({
   app_root: "/alexa/",        // Service root
   port: process.env.PORT || 8080                  // Port to use
 });
+
+const app = express();
 /*
 console.log("A");
 
@@ -22,7 +25,7 @@ console.log("C");
 const adapter = new ExpressAdapter(skill, true, true);
 console.log("D");
 */
-server.post('/', (req, res) => {
+app.post('/', (req, res) => {
   req.header('User-Agent')
 });
 
