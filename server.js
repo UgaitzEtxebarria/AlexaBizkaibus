@@ -1,10 +1,10 @@
 'use strict';
 
 var AlexaAppServer = require('alexa-app-server');
-const { Core } = require('ask-sdk-core');
+/*const { Core } = require('ask-sdk-core');
 console.log("Pre");
 const { ExpressAdapter } = require('ask-sdk-express-adapter');
- 
+ */
 var server = new AlexaAppServer({
   server_root: __dirname,     // Path to root
   public_html: "public_html", // Static content
@@ -12,7 +12,7 @@ var server = new AlexaAppServer({
   app_root: "/alexa/",        // Service root
   port: process.env.PORT || 8080                  // Port to use
 });
-
+/*
 console.log("A");
 
 const skillBuilder = Alexa.SkillBuilders.custom();
@@ -21,7 +21,9 @@ const skill = skillBuilder.create();
 console.log("C");
 const adapter = new ExpressAdapter(skill, true, true);
 console.log("D");
-
-server.post('/', adapter.getRequestHandlers());
+*/
+server.post('/', (req, res) => {
+  req.header('User-Agent')
+});
 
 server.start();
