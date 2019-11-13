@@ -1,8 +1,9 @@
 'use strict';
 
 var AlexaAppServer = require('alexa-app-server');
+const { ExpressAdapter } = require('ask-sdk-express-adapter');
  
-var instance = new AlexaAppServer({
+var server = new AlexaAppServer({
   server_root: __dirname,     // Path to root
   public_html: "public_html", // Static content
   app_dir: "apps",            // Location of alexa-app modules
@@ -10,5 +11,6 @@ var instance = new AlexaAppServer({
   port: process.env.PORT || 8080                  // Port to use
 });
 
+server.post('/', adapter.getRequestHandlers());
+
 server.start();
-server.express.use('/test', function(req, res) { res.send("OK"); });
