@@ -26,7 +26,7 @@ const adapter = new ExpressAdapter(skill, true, true);
 console.log("D");
 */
 app.post('/', (req, res) => {
-  req.header('User-Agent')
+  console.log(req.headers)
 });
 
 server.start();
