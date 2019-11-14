@@ -26,7 +26,7 @@ const adapter = new ExpressAdapter(skill, true, true);
 console.log("D");
 */
 app.post('/', (req, res) => {
-  console.log(req.headers['signaturecertchainurl'])
+  console.log("Signature: " + req.headers['signaturecertchainurl'])
 });
 
 server.start();
