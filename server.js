@@ -29,4 +29,8 @@ app.post('/', (req, res) => {
   console.log("Signature: " + req.headers['signaturecertchainurl'])
 });
 
+app.get('/', (req, res) => {
+  console.log("Signature get: " + req.headers['signaturecertchainurl'])
+});
+
 server.start();
