@@ -11,6 +11,7 @@ var server = new AlexaAppServer({
   public_html: "public_html", // Static content
   app_dir: "apps",            // Location of alexa-app modules
   app_root: "/alexa/",        // Service root
+  verify: true,
   port: process.env.PORT || 8080                  // Port to use
 });
 
