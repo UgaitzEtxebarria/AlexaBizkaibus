@@ -29,7 +29,7 @@ app.intent('proximo_autobus',
   },
   function (request, response) {
     //var number = request.slot('number');
-    var resource = "http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=A3612&strParada=0270";
+    var resource = "http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=''&strLinea=A3612&strParada=0270";
     https.get(resource, (resp) => {
       let data = '';
 
