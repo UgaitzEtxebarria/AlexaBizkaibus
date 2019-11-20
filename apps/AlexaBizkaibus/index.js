@@ -22,11 +22,11 @@ app.error = function (exception, request, response) {
 
 app.intent('proximo_autobus',
   {
-    "slots":{"number":"NUMBER"},
+    "slots":{"number": "AMAZON.NUMBER"},
     "utterances": [
-      "Cuando llega el siguiente autobus",
-      "Cual es el siguiente bus",
-      "El proximo bus"]
+      "Cuando llega el siguiente autobus a la parada {-|number}",
+      "Cual es el siguiente bus en {-|number}",
+      "El proximo bus en {-|number}"]
   },
   function (request, response) {
     var number = request.slot('number');
