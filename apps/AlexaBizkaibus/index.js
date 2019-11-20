@@ -31,7 +31,7 @@ app.intent('proximo_autobus',
     //var number = request.slot('number');
     var url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=A3612&strParada=0270';
 
-  http.get(url, function(res){
+  https.get(url, function(res){
       var body = '';
   
       res.on('data', function(chunk){
