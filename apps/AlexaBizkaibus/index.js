@@ -67,13 +67,15 @@ app.intent('proximo_autobus',
               //Extract the value from the data element
               extractedData = result['GetPasoParadaResult'];
               console.log(extractedData);
-              if(typeof extractedData["PasoParada"] !== 'undefined'){
+              if(typeof extractedData["PasoParada"] !== 'undefined')
+              {
+                console.log("Hay autobuses en direccion a esta parada.");
                 extractedData.forEach(element => { 
                   console.log("Elemento: ", element["PasoParada"]); 
                 });
               } 
               else 
-                response.say("No se esperan buses todavia en esta parada. Prueba de nuevo en otro momento.");
+                response.say("No se esperan buses todavia en esta parada");
             });
             //console.log("ExtractedData=", extractedData);
             ////////////
