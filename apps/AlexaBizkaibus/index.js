@@ -74,8 +74,10 @@ app.intent('proximo_autobus',
                   console.log("Elemento: ", element["PasoParada"]); 
                 });
               } 
-              else 
+              else {
+                console.log("No hay buses en direccion a esta parada.");
                 response.say("No se esperan buses todavia en esta parada");
+              }
             });
             //console.log("ExtractedData=", extractedData);
             ////////////
