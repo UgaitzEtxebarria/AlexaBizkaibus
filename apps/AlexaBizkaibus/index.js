@@ -29,23 +29,36 @@ app.intent('proximo_autobus',
   },
   function (request, response) {
     //var number = request.slot('number');
-    var resource = "http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=''&strLinea=A3612&strParada=0270";
-    https.get(resource, (resp) => {
-      let data = '';
+    var url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=A3612&strParada=0270';
 
-      // A chunk of data has been recieved.
-      resp.on('data', (chunk) => {
-        data += chunk;
+  http.get(url, function(res){
+      var body = '';
+  
+      res.on('data', function(chunk){
+          body += chunk;
       });
+  
+      res.on('end', function(){
+        //console.log("Got a response: ", body);
+        body = body.replace("\"\"(","").replace(");","").replace(new RegExp("'", 'g'),"\"");
 
-      // The whole response has been received. Print out the result.
-      resp.on('end', () => {
-        response.say(console.log(JSON.parse(data).explanation));
+        //console.log("Cleaned: ", body);
+        var JSONResponse = JSON.parse(body);
+        console.log("JSON: ", JSONResponse);
+
+        if (JSONResponse["STATUS"] == "OK")
+        {
+            console.log("Esta OK!");
+            var result  = JSONResponse["Resultado"];
+            console.log("resultado: ", result);
+            //XMLDocument.parse(result);
+        }
+        else
+            console.log("Problemas con el servidor");
       });
-
-    }).on("error", (err) => {
-      console.log("Error: " + err.message);
-    });
+  }).on('error', function(e){
+        console.log("Got an error: ", e);
+  });
     //response.say("Cuando llegue!");
   }
 );
