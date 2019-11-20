@@ -33,9 +33,10 @@ app.intent('proximo_autobus',
     var url = "";
     console.log("Numero de parada: ", number);
     if(number != 0)
-      url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=A3612&strParada=',number;
+      url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=A3612&strParada=' + number;
     else
       url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=A3612&strParada=0270';
+      console.log("URL: ", url);
 
   http.get(url, function(res){
       var body = '';
