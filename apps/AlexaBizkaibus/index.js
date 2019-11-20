@@ -67,7 +67,7 @@ app.intent('proximo_autobus',
               //Extract the value from the data element
               extractedData = result['GetPasoParadaResult'];
               console.log(extractedData);
-              if(typeof arrayName[index] !== 'undefined'){
+              if(typeof extractedData["PasoParada"] !== 'undefined'){
                 extractedData.forEach(element => { 
                   console.log("Elemento: ", element["PasoParada"]); 
                 });
