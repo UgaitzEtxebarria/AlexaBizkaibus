@@ -2,7 +2,7 @@
 module.change_code = 1;
 'use strict';
 
-const https = require('https');
+const http = require('http');
 var alexa = require('alexa-app');
 var app = new alexa.app('alexa-skill-bizkaibus');
 
@@ -31,7 +31,7 @@ app.intent('proximo_autobus',
     //var number = request.slot('number');
     var url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=A3612&strParada=0270';
 
-  https.get(url, function(res){
+  http.get(url, function(res){
       var body = '';
   
       res.on('data', function(chunk){
