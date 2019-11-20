@@ -51,7 +51,7 @@ app.intent('proximo_autobus',
 
         //console.log("Cleaned: ", body);
         var JSONResponse = JSON.parse(body);
-        console.log("JSON: ", JSONResponse);
+        //console.log("JSON: ", JSONResponse);
 
         if (JSONResponse["STATUS"] == "OK")
         {
@@ -67,9 +67,13 @@ app.intent('proximo_autobus',
               //Extract the value from the data element
               extractedData = result['GetPasoParadaResult'];
               console.log(extractedData);
-              extractedData.forEach(element => { 
-                console.log("Elemento: ", element["PasoParada"]); 
-              }); 
+              if(typeof arrayName[index] !== 'undefined'){
+                extractedData.forEach(element => { 
+                  console.log("Elemento: ", element["PasoParada"]); 
+                });
+              } 
+              else 
+                response.say("No se esperan buses todavia en esta parada. Prueba de nuevo en otro momento.");
             });
             //console.log("ExtractedData=", extractedData);
             ////////////
