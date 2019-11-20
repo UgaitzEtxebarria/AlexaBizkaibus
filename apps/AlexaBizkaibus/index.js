@@ -62,7 +62,7 @@ app.intent('proximo_autobus',
               extractedData = result['GetPasoParadaResult'];
               console.log(extractedData);
               extractedData.forEach(element => { 
-                console.log("Elemento: ", element["linea"]); 
+                console.log("Elemento: ", element["PasoParada"]); 
               }); 
             });
             //console.log("ExtractedData=", extractedData);
