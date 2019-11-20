@@ -60,12 +60,12 @@ app.intent('proximo_autobus',
             parser.parseString(xml, function(err,result){
               //Extract the value from the data element
               extractedData = result['GetPasoParadaResult'];
+              console.log(extractedData);
               extractedData.forEach(element => { 
                 console.log("Elemento: ", element["linea"]); 
               }); 
-              //console.log(extractedData);
             });
-            console.log("ExtractedData=", extractedData);
+            //console.log("ExtractedData=", extractedData);
             ////////////
         }
         else
