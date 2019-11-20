@@ -3,6 +3,7 @@ module.change_code = 1;
 'use strict';
 
 const http = require('http');
+var xml2js = require('xml2js');
 var alexa = require('alexa-app');
 var app = new alexa.app('alexa-skill-bizkaibus');
 
@@ -49,9 +50,20 @@ app.intent('proximo_autobus',
         if (JSONResponse["STATUS"] == "OK")
         {
             console.log("Esta OK!");
-            var result  = JSONResponse["Resultado"];
-            console.log("resultado: ", result);
-            //XMLDocument.parse(result);
+            var xml  = JSONResponse["Resultado"];
+            console.log("resultado: ", xml);
+            
+            ///////XML query////
+
+            var extractedData = "";
+            var parser = new xml2js.Parser();
+            parser.parseString(xml, function(err,result){
+              //Extract the value from the data element
+              extractedData = result['GetPasoParadaResult'];
+              console.log(extractedData);
+            });
+            console.log("ExtractedData=", extractedData);
+            ////////////
         }
         else
             console.log("Problemas con el servidor");
