@@ -22,16 +22,21 @@ app.error = function (exception, request, response) {
 
 app.intent('proximo_autobus',
   {
-    //"slots":{"number":"NUMBER"},
+    "slots":{"number":"NUMBER"},
     "utterances": [
       "Cuando llega el siguiente autobus",
       "Cual es el siguiente bus",
       "El proximo bus"]
   },
   function (request, response) {
-    //var number = request.slot('number');
-    var url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=A3612&strParada=0270';
-
+    var number = request.slot('number');
+    var url = "";
+    
+    if(number != 0)
+      url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=A3612&strParada=',number;
+    else
+      url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=A3612&strParada=0270';
+      
   http.get(url, function(res){
       var body = '';
   
