@@ -35,7 +35,8 @@ app.intent('proximo_autobus',
   function (request, response) {
     var number = request.slot('number');
     var url = "";
-	var Linea = "A3642"
+	var Linea = "A3642";
+	var respuesta = "Sin respuesta";
     console.log("Numero de parada: ", number);
     if(typeof number === 'undefined' || number === null) //For testing
 	{
@@ -71,7 +72,7 @@ app.intent('proximo_autobus',
             ///////XML query////
 
             var extractedData = "";
-			var respuesta = "Sin respuesta";
+			
             var parser = new xml2js.Parser();
             parser.parseString(xml, function(err,result){
               //Extract the value from the data element
@@ -119,7 +120,8 @@ app.intent('proximo_autobus',
   }).on('error', function(e){
         console.log("Got an error: ", e);
   });
-    response.say("Cuando llegue!");
+	response.say(respuesta).shouldEndSession(false);
+    //response.say("Cuando llegue!");
   }
 );
 
