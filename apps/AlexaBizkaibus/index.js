@@ -63,6 +63,7 @@ app.intent('proximo_autobus',
 
         if (JSONResponse["STATUS"] == "OK")
         {
+			response.say("Si").shouldEndSession(false);
             console.log("Esta OK!");
             var xml  = JSONResponse["Resultado"];
             console.log("resultado: ", xml);
@@ -92,7 +93,7 @@ app.intent('proximo_autobus',
 					console.log("Tiempos: " + minutos);
 					respuesta = "La linea " + Linea + " llega a la parada " + number + " en " + minutos +  " minutos.";
 					console.log("Respuesta: " + respuesta);
-					response.say(respuesta).shouldEndSession(true);
+					//response.say(respuesta).shouldEndSession(true);
 				  }
                 });
 				
@@ -109,7 +110,7 @@ app.intent('proximo_autobus',
               }
             });
 			
-			response.say(respuesta).shouldEndSession(true);
+			response.say(respuesta).shouldEndSession(false);
             ////////////
         }
         else
