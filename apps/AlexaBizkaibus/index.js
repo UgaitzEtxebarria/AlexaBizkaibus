@@ -80,9 +80,10 @@ app.intent('proximo_autobus',
 				  {
 					console.log("Linea " + Linea + " encontrada."); 
 					found = true;
-					console.log("Tiempos: " + element["e1"][0]);
+					console.log("Tiempos: " + element["e1"]["minutos"][0]);
 				  }
                 });
+				
 				if(!found)
 				{
 					console.log("No se encuentra la linea " + Linea + ".");
