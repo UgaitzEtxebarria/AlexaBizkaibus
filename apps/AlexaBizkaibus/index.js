@@ -70,6 +70,7 @@ app.intent('proximo_autobus',
             ///////XML query////
 
             var extractedData = "";
+			var respuesta = "Sin respuesta";
             var parser = new xml2js.Parser();
             parser.parseString(xml, function(err,result){
               //Extract the value from the data element
@@ -89,7 +90,7 @@ app.intent('proximo_autobus',
 					found = true;
 					var minutos = element["e1"][0]["minutos"];
 					console.log("Tiempos: " + minutos);
-					var respuesta = "La linea " + Linea + " llega a la parada " + number + " en " + minutos +  " minutos.";
+					respuesta = "La linea " + Linea + " llega a la parada " + number + " en " + minutos +  " minutos.";
 					console.log("Respuesta: " + respuesta);
 					response.say(respuesta).shouldEndSession(true);
 				  }
@@ -98,15 +99,17 @@ app.intent('proximo_autobus',
 				if(!found)
 				{
 					console.log("No se encuentra la linea " + Linea + ".");
-					response.say("La linea " + Linea + " no se encuentra en esta parada.").shouldEndSession(false);
+					respuesta = "La linea " + Linea + " no se encuentra en esta parada.";
 				}
 					
               } 
               else {
                 console.log("No hay buses en direccion a esta parada.");
-                response.say("No se esperan buses todavia en esta parada").shouldEndSession(false);
+                respuesta = "No se esperan buses todavia en esta parada";
               }
             });
+			
+			response.say(respuesta).shouldEndSession(true);
             ////////////
         }
         else
