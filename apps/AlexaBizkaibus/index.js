@@ -79,9 +79,16 @@ app.intent('proximo_autobus',
 				  if(element["linea"] == Linea)
 				  {
 					console.log("Linea " + Linea + " encontrada."); 
-					console.log("Tiempo: " + element["e1"]["tiempo"]);
+					found = true;
+					console.log("Tiempo: " + element["e1"]["minutos"]);
 				  }
                 });
+				if(!found)
+				{
+					console.log("No se encuentra la linea " + Linea + ".");
+					response.say("La linea " + Linea + " No se encuentra en esta parada.").shouldEndSession(false);
+				}
+					
               } 
               else {
                 console.log("No hay buses en direccion a esta parada.");
