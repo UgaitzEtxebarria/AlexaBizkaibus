@@ -38,7 +38,10 @@ app.intent('proximo_autobus',
 	var Linea = "A3642"
     console.log("Numero de parada: ", number);
     if(typeof number === 'undefined' || number === null) //For testing
+	{
+		console.log("Numero de parada cambiado");
       number=0270;
+	}
   
     url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + Linea + '&strParada=' + zeroPad(number);
     console.log("URL: ", url);
