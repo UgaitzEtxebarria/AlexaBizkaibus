@@ -90,6 +90,7 @@ app.intent('proximo_autobus',
 					var minutos = element["e1"][0]["minutos"];
 					console.log("Tiempos: " + minutos);
 					var respuesta = "La linea " + Linea + " llega a la parada " + number + " en " + minutos +  " minutos.";
+					console.log("Respuesta: " + respuesta);
 					response.say(respuesta).shouldEndSession(true);
 				  }
                 });
