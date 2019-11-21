@@ -31,7 +31,7 @@ app.intent('proximo_autobus',
   function (request, response) {
     var number = request.slot('number');
     var url = "";
-	var Linea = "A3612"
+	var Linea = "A3642"
     console.log("Numero de parada: ", number);
     if(typeof number !== 'undefined' && number !== null)
       url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + Linea + '&strParada=' + number;
@@ -67,7 +67,7 @@ app.intent('proximo_autobus',
             parser.parseString(xml, function(err,result){
               //Extract the value from the data element
               extractedData = result['GetPasoParadaResult'];
-              console.log(extractedData);
+              //console.log(extractedData);
               if(typeof extractedData["PasoParada"] !== 'undefined')
               {
                 var found = false;
