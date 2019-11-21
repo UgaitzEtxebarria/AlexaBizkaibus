@@ -33,13 +33,13 @@ app.intent('proximo_autobus',
       "El proximo bus en {-|number}"]
   },
   function (request, response) {
-    var number = parseInt(request.slot('number'), 10);
+    var number = request.slot('number');
     var url = "";
 	var Linea = "A3642"
     console.log("Numero de parada: ", number);
     if(typeof number === 'undefined' || number === null ||number == 'NaN') //For testing
 	{
-		number=0270;
+		number=parseInt("0270", 10);
 		console.log("Numero de parada cambiado: " + number);
 	}
   
