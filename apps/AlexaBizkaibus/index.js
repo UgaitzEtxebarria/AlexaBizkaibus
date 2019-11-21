@@ -37,7 +37,7 @@ app.intent('proximo_autobus',
     var url = "";
 	var Linea = "A3642"
     console.log("Numero de parada: ", number);
-    if(typeof number === 'undefined' || number === null) //For testing
+    if(typeof number === 'undefined' || number === null ||number == 'NaN') //For testing
 	{
 		number=0270;
 		console.log("Numero de parada cambiado: " + number);
