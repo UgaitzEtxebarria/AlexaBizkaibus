@@ -31,11 +31,12 @@ app.intent('proximo_autobus',
   function (request, response) {
     var number = request.slot('number');
     var url = "";
+	var Linea = "A3612"
     console.log("Numero de parada: ", number);
     if(typeof number !== 'undefined' && number !== null)
-      url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=A3612&strParada=' + number;
+      url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + Linea + '&strParada=' + number;
     else
-      url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=A3612&strParada=0270';
+      url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + Linea + '&strParada=0270';
       console.log("URL: ", url);
 
   http.get(url, function(res){
@@ -69,10 +70,16 @@ app.intent('proximo_autobus',
               console.log(extractedData);
               if(typeof extractedData["PasoParada"] !== 'undefined')
               {
-                console.log("Hay autobuses en direccion a esta parada.");
-                extractedData["PasoParada"].forEach(element => { 
+                var found = false;
+				console.log("Hay autobuses en direccion a esta parada.");
+                
+				extractedData["PasoParada"].forEach(element => { 
 				  console.log("Elementito: ", element);
-                  console.log("Elemento: ", element["PasoParada"]); 
+				  if(element["linea"] == Linea)
+				  {
+					console.log("Linea " + Linea + " encontrada."); 
+					console.log("Tiempo: " + element["e1"]);
+				  }
                 });
               } 
               else {
