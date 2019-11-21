@@ -71,6 +71,7 @@ app.intent('proximo_autobus',
               {
                 console.log("Hay autobuses en direccion a esta parada.");
                 extractedData.forEach(element => { 
+				  console.log("Elemento: ", element);
                   console.log("Elemento: ", element["PasoParada"]); 
                 });
               } 
