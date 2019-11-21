@@ -33,7 +33,7 @@ app.intent('proximo_autobus',
       "El proximo bus en {-|number}"]
   },
   function (request, response) {
-    Number number = request.slot('number');
+    var number = request.slot('number');
     var url = "";
 	var Linea = "A3642"
     console.log("Numero de parada: ", number);
