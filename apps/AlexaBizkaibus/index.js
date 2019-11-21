@@ -79,7 +79,7 @@ app.intent('proximo_autobus',
 				  if(element["linea"] == Linea)
 				  {
 					console.log("Linea " + Linea + " encontrada."); 
-					console.log("Tiempo: " + element["e1"]);
+					console.log("Tiempo: " + element["e1"]["tiempo"]);
 				  }
                 });
               } 
