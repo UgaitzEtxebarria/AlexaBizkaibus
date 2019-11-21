@@ -80,7 +80,7 @@ app.intent('proximo_autobus',
 				  {
 					console.log("Linea " + Linea + " encontrada."); 
 					found = true;
-					console.log("Tiempos: " + element["e1"]["minutos"][0]);
+					console.log("Tiempos: " + element["e1"][0]["minutos"]);
 				  }
                 });
 				
@@ -96,7 +96,6 @@ app.intent('proximo_autobus',
                 response.say("No se esperan buses todavia en esta parada").shouldEndSession(false);
               }
             });
-            //console.log("ExtractedData=", extractedData);
             ////////////
         }
         else
