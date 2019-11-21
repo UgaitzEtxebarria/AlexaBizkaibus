@@ -37,7 +37,7 @@ app.intent('proximo_autobus',
     var url = "";
 	var Linea = "A3642"
     console.log("Numero de parada: ", number);
-    if(typeof number === 'undefined' || number === null ||number == 'NaN') //For testing
+    if(typeof number === 'undefined' || number === null) //For testing
 	{
 		number=parseInt("0270", 10);
 		console.log("Numero de parada cambiado: " + number);
@@ -89,7 +89,8 @@ app.intent('proximo_autobus',
 					found = true;
 					var minutos = element["e1"][0]["minutos"];
 					console.log("Tiempos: " + minutos);
-					response.say("La linea " + Linea + " llega a la parada " + number + " en " + minutos +  " minutos.").shouldEndSession(false);
+					var respuesta = "La linea " + Linea + " llega a la parada " + number + " en " + minutos +  " minutos.";
+					response.say(respuesta).shouldEndSession(true);
 				  }
                 });
 				
