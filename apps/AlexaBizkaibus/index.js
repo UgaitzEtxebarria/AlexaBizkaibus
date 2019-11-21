@@ -33,13 +33,13 @@ app.intent('proximo_autobus',
     var url = "";
 	var Linea = "A3642"
     console.log("Numero de parada: ", number);
-    if(typeof number !== 'undefined' && number !== null)
-      url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + Linea + '&strParada=' + number;
-    else
-      url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + Linea + '&strParada=0270';
-      console.log("URL: ", url);
+    if(typeof number === 'undefined' && number === null) //For testing
+      number=0270;
+  
+    url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + Linea + '&strParada=' + number;
+    console.log("URL: ", url);
 
-  http.get(url, function(res){
+    http.get(url, function(res){
       var body = '';
   
       res.on('data', function(chunk){
@@ -80,14 +80,16 @@ app.intent('proximo_autobus',
 				  {
 					console.log("Linea " + Linea + " encontrada."); 
 					found = true;
-					console.log("Tiempos: " + element["e1"][0]["minutos"]);
+					var minutos = element["e1"][0]["minutos"];
+					console.log("Tiempos: " + minutos);
+					response.say("La linea " + Linea + " llega a la parada " + number + " en " + minutos +  " minutos.").shouldEndSession(false);
 				  }
                 });
 				
 				if(!found)
 				{
 					console.log("No se encuentra la linea " + Linea + ".");
-					response.say("La linea " + Linea + " No se encuentra en esta parada.").shouldEndSession(false);
+					response.say("La linea " + Linea + " no se encuentra en esta parada.").shouldEndSession(false);
 				}
 					
               } 
