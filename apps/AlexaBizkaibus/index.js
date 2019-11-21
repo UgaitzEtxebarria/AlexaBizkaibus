@@ -54,6 +54,7 @@ app.intent('proximo_autobus',
       });
   
       res.on('end', function(){
+		  response.say("Si").shouldEndSession(false);
         //console.log("Got a response: ", body);
         body = body.replace("\"\"(","").replace(");","").replace(new RegExp("'", 'g'),"\"");
 
@@ -63,7 +64,7 @@ app.intent('proximo_autobus',
 
         if (JSONResponse["STATUS"] == "OK")
         {
-			response.say("Si").shouldEndSession(false);
+			
             console.log("Esta OK!");
             var xml  = JSONResponse["Resultado"];
             console.log("resultado: ", xml);
