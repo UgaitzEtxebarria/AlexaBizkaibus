@@ -7,6 +7,10 @@ var xml2js = require('xml2js');
 var alexa = require('alexa-app');
 var app = new alexa.app('alexa-skill-bizkaibus');
 
+function zeroPad(num) {
+  return String(num).padStart(4, '0')
+}
+
 
 app.launch(function (request, response) {
   response.say('Bienvenido a la skill de Bizkaibus').reprompt('Way to go. You got it to run. Bad ass.').shouldEndSession(false);
@@ -36,7 +40,7 @@ app.intent('proximo_autobus',
     if(typeof number === 'undefined' || number === null) //For testing
       number=0270;
   
-    url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + Linea + '&strParada=' + number;
+    url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + Linea + '&strParada=' + zeroPad(number);
     console.log("URL: ", url);
 
     http.get(url, function(res){
