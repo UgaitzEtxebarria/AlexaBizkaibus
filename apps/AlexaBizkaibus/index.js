@@ -16,18 +16,18 @@ function zeroPad(num) {
 function getAPI(request, response) {
 	try {
 		
-		var number = request.slot('number');
+		var stopId = request.slot('number');
 		var url = "";
-		var Linea = "A3642";
+		var lineId = "A3642";
 		var respuesta = "Sin respuesta";
-		console.log("Numero de parada: ", number);
-		if(typeof number === 'undefined' || number === null) //For testing
+		console.log("Numero de parada: ", stopId);
+		if(typeof stopId === 'undefined' || stopId === null) //For testing
 		{
-			number = parseInt("0270", 10);
-			console.log("Numero de parada cambiado: " + number);
+			stopId = parseInt("0270", 10);
+			console.log("Numero de parada cambiado: " + stopId);
 		}
 	  
-		url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + Linea + '&strParada=' + zeroPad(number);
+		url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + lineId + '&strParada=' + zeroPad(stopId);
 		console.log("URL: ", url);
 
 
@@ -55,7 +55,7 @@ function getAPI(request, response) {
 					//console.log("JSON: ", JSONResponse);
 
 					if (JSONResponse["STATUS"] == "OK")
-						resolve(JSONResponse["Resultado"], Linea, number);
+						resolve(JSONResponse["Resultado"], lineId, stopId);
 					else
 						reject("No esta disponible");
 				  });
