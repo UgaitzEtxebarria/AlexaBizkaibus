@@ -7,6 +7,9 @@ var xml2js = require('xml2js');
 var alexa = require('alexa-app');
 var app = new alexa.app('alexa-skill-bizkaibus');
 
+var stopId;
+var lineId;
+
 function zeroPad(num) {
   return String(num).padStart(4, '0')
 }
@@ -16,9 +19,9 @@ function zeroPad(num) {
 function getAPI(request, response) {
 	try {
 		
-		var stopId = request.slot('number');
+		stopId = request.slot('number');
 		var url = "";
-		var lineId = "A3642";
+		lineId = "A3642";
 		var respuesta = "Sin respuesta";
 		console.log("Numero de parada: ", stopId);
 		if(typeof stopId === 'undefined' || stopId === null) //For testing
@@ -55,7 +58,7 @@ function getAPI(request, response) {
 					//console.log("JSON: ", JSONResponse);
 
 					if (JSONResponse["STATUS"] == "OK")
-						resolve(JSONResponse["Resultado"], lineId, stopId);
+						resolve(JSONResponse["Resultado"]);
 					else
 						reject("No esta disponible");
 				  });
@@ -73,7 +76,7 @@ function getAPI(request, response) {
 	}
   }
 
-function processBody(xml, lineId, stopId){
+function processBody(xml){
 	try{
 		console.log("Processing body");
         
@@ -157,7 +160,7 @@ app.intent('proximo_autobus',
   },
   function(request, response) {
 	getAPI(request, response)
-	.then((xml, lineId, stopId) => {
+	.then(xml) => {
 	  response.say("Tengo datos").shouldEndSession(false);
       console.log("OK!: ");
 	  console.log(xml);
