@@ -77,8 +77,8 @@ function processBody(xml, lineId, stopId){
 	try{
 		console.log("Processing body");
         
-		/*var xml  = JSONResponse["Resultado"];
-		console.log("resultado: ", xml);*/
+		/*var xml  = JSONResponse["Resultado"];*/
+		console.log("resultado: ", xml);
 		
 		///////XML query////
 
@@ -95,7 +95,7 @@ function processBody(xml, lineId, stopId){
 			console.log("Hay autobuses en direccion a esta parada.");
 			
 			extractedData["PasoParada"].forEach(element => { 
-			  console.log("Elemento: ", element);
+			  //console.log("Elemento: ", element);
 			  console.log("Linea: " + element["linea"] + " - " + lineId);
 			  if(element["linea"] == lineId)
 			  {
