@@ -99,7 +99,7 @@ function processBody(xml, lineId, stopId){
 			  console.log("Linea: " + element["linea"] + " - " + lineId);
 			  if(element["linea"] == lineId)
 			  {
-				console.log("Linea " + Linea + " encontrada."); 
+				console.log("Linea " + lineId + " encontrada."); 
 				found = true;
 				var minutos = element["e1"][0]["minutos"];
 				console.log("Tiempos: " + minutos);
@@ -111,8 +111,8 @@ function processBody(xml, lineId, stopId){
 			
 			if(!found)
 			{
-				console.log("No se encuentra la linea " + Linea + ".");
-				respuesta = "La linea " + Linea + " no se encuentra en esta parada.";
+				console.log("No se encuentra la linea " + lineId + ".");
+				respuesta = "La linea " + lineId + " no se encuentra en esta parada.";
 			}
 				
 		  } 
