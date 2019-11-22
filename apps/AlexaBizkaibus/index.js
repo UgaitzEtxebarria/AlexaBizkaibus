@@ -16,42 +16,34 @@ function zeroPad(num) {
 function getAPI(request, response) {
 	try {
 		
-    var number = request.slot('number');
-    var url = "";
-	var Linea = "A3642";
-	var respuesta = "Sin respuesta";
-    console.log("Numero de parada: ", number);
-    if(typeof number === 'undefined' || number === null) //For testing
-	{
-		number = parseInt("0270", 10);
-		console.log("Numero de parada cambiado: " + number);
-	}
-  
-    url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + Linea + '&strParada=' + zeroPad(number);
-    console.log("URL: ", url);
-	
-	http.get(url, function(err, resp, body) {
-            if (err) {
-				console.log("Errorcito");
-            } else {
-				console.log("A procesar");
-            }
-        })
+		var number = request.slot('number');
+		var url = "";
+		var Linea = "A3642";
+		var respuesta = "Sin respuesta";
+		console.log("Numero de parada: ", number);
+		if(typeof number === 'undefined' || number === null) //For testing
+		{
+			number = parseInt("0270", 10);
+			console.log("Numero de parada cambiado: " + number);
+		}
+	  
+		url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + Linea + '&strParada=' + zeroPad(number);
+		console.log("URL: ", url);
 
-    return new Promise(function(resolve, reject) {
-     // Do async job
-	 console.log("URL2: ", url);
-        http.get(url, function(err, resp, body) {
-            if (err) {
-				console.log("Errorcito");
-                reject(err);
-            } else {
-				console.log("A procesar");
-                resolve(body);
-            }
-        })
-    })
-	
+
+		return new Promise(function(resolve, reject) {
+			 // Do async job
+			 console.log("URL2: ", url);
+			 
+			http.get(url, 
+				function(body) 
+				{
+					console.log("A procesar: " + body);
+					resolve(body);
+				}
+			).on('error', (e) => { reject('Got error: ${e.message}'); });
+			
+		})
 	//response.say(respuesta).shouldEndSession(false);
     //response.say("Cuando llegue!");
   	}
