@@ -150,7 +150,9 @@ app.error = function (exception, request, response) {
 
 app.intent('proximo_autobus',
   {
-    "slots":{"stopId": "AMAZON.NUMBER"},
+    "slots": {
+		"stopId": "AMAZON.NUMBER"
+	},
     "utterances": [
       "Cuando llega el siguiente autobus a la parada {-|stopId}",
       "Cual es el siguiente bus en {-|stopId}",
