@@ -144,6 +144,12 @@ app.intent('proximo_autobus',
   },
   function(request, response) {
 	getAPI(request, response)
+	.then(ok => {
+      console.log("OK!: " + ok)
+    })
+	.catch(err => {
+      console.error("Fatal Error: " + err)
+    })
   }
 );
 
