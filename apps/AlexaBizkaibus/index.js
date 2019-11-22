@@ -11,6 +11,103 @@ function zeroPad(num) {
   return String(num).padStart(4, '0')
 }
 
+/////Functions/////
+
+function getAPI(request, response) {
+    var number = request.slot('number');
+    var url = "";
+	var Linea = "A3642";
+	var respuesta = "Sin respuesta";
+    console.log("Numero de parada: ", number);
+    if(typeof number === 'undefined' || number === null) //For testing
+	{
+		number=parseInt("0270", 10);
+		console.log("Numero de parada cambiado: " + number);
+	}
+  
+    url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + Linea + '&strParada=' + zeroPad(number);
+    console.log("URL: ", url);
+
+    return new Promise(function(resolve, reject) {
+     // Do async job
+        http.get(url, function(err, resp, body) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(body);
+            }
+        })
+    })
+	
+	//response.say(respuesta).shouldEndSession(false);
+    //response.say("Cuando llegue!");
+  }
+
+function processBody(body){
+
+        //console.log("Got a response: ", body);
+        body = body.replace("\"\"(","").replace(");","").replace(new RegExp("'", 'g'),"\"");
+
+        //console.log("Cleaned: ", body);
+        var JSONResponse = JSON.parse(body);
+        //console.log("JSON: ", JSONResponse);
+
+        if (JSONResponse["STATUS"] == "OK")
+        {
+			
+            console.log("Esta OK!");
+            var xml  = JSONResponse["Resultado"];
+            console.log("resultado: ", xml);
+            
+            ///////XML query////
+
+            var extractedData = "";
+			
+            var parser = new xml2js.Parser();
+            parser.parseString(xml, function(err,result){
+              //Extract the value from the data element
+              extractedData = result['GetPasoParadaResult'];
+              //console.log(extractedData);
+              if(typeof extractedData["PasoParada"] !== 'undefined')
+              {
+                var found = false;
+				console.log("Hay autobuses en direccion a esta parada.");
+                
+				extractedData["PasoParada"].forEach(element => { 
+				  console.log("Elemento: ", element);
+				  console.log("Linea: " + element["linea"] + " - " + Linea);
+				  if(element["linea"] == Linea)
+				  {
+					console.log("Linea " + Linea + " encontrada."); 
+					found = true;
+					var minutos = element["e1"][0]["minutos"];
+					console.log("Tiempos: " + minutos);
+					respuesta = "La linea " + Linea + " llega a la parada " + number + " en " + minutos +  " minutos.";
+					console.log("Respuesta: " + respuesta);
+					//response.say(respuesta).shouldEndSession(true);
+				  }
+                });
+				
+				if(!found)
+				{
+					console.log("No se encuentra la linea " + Linea + ".");
+					respuesta = "La linea " + Linea + " no se encuentra en esta parada.";
+				}
+					
+              } 
+              else {
+                console.log("No hay buses en direccion a esta parada.");
+                respuesta = "No se esperan buses todavia en esta parada";
+              }
+            });
+			
+			response.say(respuesta).shouldEndSession(false);
+            ////////////
+        }
+        else
+            console.log("Problemas con el servidor");
+  }
+  
 
 app.launch(function (request, response) {
   response.say('Bienvenido a la skill de Bizkaibus').reprompt('Way to go. You got it to run. Bad ass.').shouldEndSession(false);
