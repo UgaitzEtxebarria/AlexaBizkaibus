@@ -51,6 +51,7 @@ function getAPI(request, response) {
 
 function processBody(body){
 	try{
+		console.log("Processing body");
         //console.log("Got a response: ", body);
         body = body.replace("\"\"(","").replace(");","").replace(new RegExp("'", 'g'),"\"");
 
