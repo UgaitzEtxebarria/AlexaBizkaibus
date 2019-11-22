@@ -59,7 +59,7 @@ app.intent('proximo_autobus',
                 resolve(body);
             }
         })
-    }).then(processBody());
+    }).then(processBody(body));
 	
 	//response.say(respuesta).shouldEndSession(false);
     //response.say("Cuando llegue!");
