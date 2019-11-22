@@ -157,7 +157,6 @@ app.intent('proximo_autobus',
       "El proximo bus en {-|number}"]
   },
   function(request, response) {
-	  response.say("Tengo respuesta");
 	return getAPI(request, response)
 	.then(xml => {
 	  var definitivo = processBody(xml);
