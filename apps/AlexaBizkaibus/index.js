@@ -152,7 +152,7 @@ app.intent('proximo_autobus',
 	.then(ok => {
       console.log("OK!: ");
 	  console.log(ok);
-	  var definitivo = processBody(ok);
+	  var definitivo = "Hola";//processBody(ok);
 	  console.log("Respuesta definitiva: ");
 	  console.log(definitivo);
 	  response.say(definitivo);
