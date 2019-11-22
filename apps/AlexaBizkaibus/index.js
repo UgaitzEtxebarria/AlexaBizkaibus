@@ -160,7 +160,7 @@ app.intent('proximo_autobus',
   },
   function(request, response) {
 	getAPI(request, response)
-	.then(xml) => {
+	.then(xml => {
 	  response.say("Tengo datos").shouldEndSession(false);
       console.log("OK!: ");
 	  console.log(xml);
