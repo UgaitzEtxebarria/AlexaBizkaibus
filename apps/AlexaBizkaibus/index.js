@@ -158,8 +158,11 @@ app.intent('proximo_autobus',
   function(request, response) {
 	getAPI(request, response)
 	.then((xml, lineId, stopId) => {
+	  response.say("Tengo datos").shouldEndSession(false);
       console.log("OK!: ");
 	  console.log(xml);
+	  console.log(lineId);
+	  console.log(stopId);
 	  var definitivo = processBody(xml, lineId, stopId);
 	  console.log("Respuesta definitiva: ");
 	  console.log(definitivo);
