@@ -18,10 +18,10 @@ app.launch(function (request, response) {
 
 
 app.error = function (exception, request, response) {
-  console.log(exception)
-  console.log(request);
-  console.log(response);
-  response.say('Sorry an error occured ' + error.message);
+  console.log("Exception : " + exception)
+  console.log("Request : " + request);
+  console.log("Response : " + response);
+  response.say('Ha ocurrido un error con la informacion deseada.');
 };
 
 app.intent('proximo_autobus',
