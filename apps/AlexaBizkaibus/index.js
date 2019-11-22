@@ -148,7 +148,8 @@ app.intent('proximo_autobus',
       console.log("OK!: " + ok)
     })
 	.catch(err => {
-      console.error("Fatal Error: " + err)
+      console.error("Fatal Error: ");
+	  console.error(err);
     })
   }
 );
