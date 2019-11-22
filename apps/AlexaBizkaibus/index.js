@@ -55,7 +55,7 @@ function getAPI(request, response) {
 					//console.log("JSON: ", JSONResponse);
 
 					if (JSONResponse["STATUS"] == "OK")
-						resolve(data);
+						resolve(JSONResponse["Resultado"]);
 					else
 						reject("No esta disponible");
 				  });
@@ -73,12 +73,12 @@ function getAPI(request, response) {
 	}
   }
 
-function processBody(body){
+function processBody(xml){
 	try{
 		console.log("Processing body");
         
-		var xml  = JSONResponse["Resultado"];
-		console.log("resultado: ", xml);
+		/*var xml  = JSONResponse["Resultado"];
+		console.log("resultado: ", xml);*/
 		
 		///////XML query////
 
