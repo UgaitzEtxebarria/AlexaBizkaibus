@@ -23,7 +23,7 @@ function getAPI(request, response) {
     console.log("Numero de parada: ", number);
     if(typeof number === 'undefined' || number === null) //For testing
 	{
-		number=parseInt("0270", 10);
+		number = parseInt("0270", 10);
 		console.log("Numero de parada cambiado: " + number);
 	}
   
@@ -32,6 +32,7 @@ function getAPI(request, response) {
 
     return new Promise(function(resolve, reject) {
      // Do async job
+	 console.log("URL2: ", url);
         http.get(url, function(err, resp, body) {
             if (err) {
 				console.log("Errorcito");
