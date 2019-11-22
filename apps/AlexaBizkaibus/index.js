@@ -29,6 +29,16 @@ function getAPI(request, response) {
   
     url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + Linea + '&strParada=' + zeroPad(number);
     console.log("URL: ", url);
+	
+	http.get(url, function(err, resp, body) {
+            if (err) {
+				console.log("Errorcito");
+                reject(err);
+            } else {
+				console.log("A procesar");
+                resolve(body);
+            }
+        })
 
     return new Promise(function(resolve, reject) {
      // Do async job
