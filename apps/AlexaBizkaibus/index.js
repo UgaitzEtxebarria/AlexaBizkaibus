@@ -61,13 +61,7 @@ app.intent('proximo_autobus',
         })
     }).then(
 	//////////////THEN PROCESS THE INFO/////////////////
-	var body = '';
-  
-      res.on('data', function(chunk){
-          body += chunk;
-      });
-  
-      res.on('end', function(){
+
         //console.log("Got a response: ", body);
         body = body.replace("\"\"(","").replace(");","").replace(new RegExp("'", 'g'),"\"");
 
@@ -129,7 +123,7 @@ app.intent('proximo_autobus',
         }
         else
             console.log("Problemas con el servidor");
-      });
+
 	
 	/////////////////////////
 	);
