@@ -150,17 +150,17 @@ app.error = function (exception, request, response) {
 
 app.intent('proximo_autobus',
   {
-    "slots":{"number": "AMAZON.NUMBER"},
+    "slots":{"stopId": "AMAZON.NUMBER"},
     "utterances": [
-      "Cuando llega el siguiente autobus a la parada {-|number}",
-      "Cual es el siguiente bus en {-|number}",
-      "El proximo bus en {-|number}"]
+      "Cuando llega el siguiente autobus a la parada {-|stopId}",
+      "Cual es el siguiente bus en {-|stopId}",
+      "El proximo bus en {-|stopId}"]
   },
   function(request, response) {
 	return getAPI(request, response)
 	.then(xml => {
 	  var definitivo = processBody(xml);
-	  console.log("Respuesta definitiva: " + request.slot("number"));
+	  console.log("Respuesta definitiva: " + request.slot("stopId"));
 	  console.log(definitivo);
 	  response.say(definitivo);
     })
