@@ -53,10 +53,10 @@ app.intent('proximo_autobus',
             if (err) {
                 reject(err);
             } else {
-                resolve(response.say("Hola!").shouldEndSession(false););
+                resolve(body);
             }
         })
-    })
+    }).then(response.say("Hola!").shouldEndSession(false));
 	//response.say(respuesta).shouldEndSession(false);
     //response.say("Cuando llegue!");
 
