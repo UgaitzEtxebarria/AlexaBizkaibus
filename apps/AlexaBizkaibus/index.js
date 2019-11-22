@@ -158,7 +158,7 @@ app.intent('proximo_autobus',
   },
   function(request, response) {
 	  response.say("Tengo respuesta");
-	getAPI(request, response)
+	return getAPI(request, response)
 	.then(xml => {
 	  var definitivo = processBody(xml);
 	  console.log("Respuesta definitiva: ");
