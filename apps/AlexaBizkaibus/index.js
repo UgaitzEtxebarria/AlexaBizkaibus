@@ -132,35 +132,7 @@ app.intent('proximo_autobus',
       "Cual es el siguiente bus en {-|number}",
       "El proximo bus en {-|number}"]
   },
-  function (request, response) {
-    var number = request.slot('number');
-    var url = "";
-	var Linea = "A3642";
-	var respuesta = "Sin respuesta";
-    console.log("Numero de parada: ", number);
-    if(typeof number === 'undefined' || number === null) //For testing
-	{
-		number=parseInt("0270", 10);
-		console.log("Numero de parada cambiado: " + number);
-	}
-  
-    url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + Linea + '&strParada=' + zeroPad(number);
-    console.log("URL: ", url);
-
-    return new Promise(function(resolve, reject) {
-     // Do async job
-        http.get(url, function(err, resp, body) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(body);
-            }
-        })
-    }).then(response.say("Hola!").shouldEndSession(false));
-	
-	//response.say(respuesta).shouldEndSession(false);
-    //response.say("Cuando llegue!");
-  }
+  getAPI(request, response)
 );
 
 app.intent("AMAZON.HelpIntent", {
