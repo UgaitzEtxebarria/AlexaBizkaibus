@@ -159,7 +159,7 @@ app.intent('proximo_autobus',
 	.then((xml, lineId, stopId) => {
       console.log("OK!: ");
 	  console.log(xml);
-	  var definitivo = processBody(ok, lineId, stopId);
+	  var definitivo = processBody(xml, lineId, stopId);
 	  console.log("Respuesta definitiva: ");
 	  console.log(definitivo);
 	  response.say(definitivo);
