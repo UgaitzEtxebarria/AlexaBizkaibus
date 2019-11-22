@@ -35,7 +35,35 @@ app.intent('proximo_autobus',
       "Cual es el siguiente bus en {-|number}",
       "El proximo bus en {-|number}"]
   },
-  getAPI(request,response).then(data => processBody(data));
+  function (request, response) {
+    var number = request.slot('number');
+    var url = "";
+	var Linea = "A3642";
+	var respuesta = "Sin respuesta";
+    console.log("Numero de parada: ", number);
+    if(typeof number === 'undefined' || number === null) //For testing
+	{
+		number=parseInt("0270", 10);
+		console.log("Numero de parada cambiado: " + number);
+	}
+  
+    url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + Linea + '&strParada=' + zeroPad(number);
+    console.log("URL: ", url);
+
+    return new Promise(function(resolve, reject) {
+     // Do async job
+        http.get(url, function(err, resp, body) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(body);
+            }
+        })
+    }).then(response.say("Hola!").shouldEndSession(false));
+	
+	//response.say(respuesta).shouldEndSession(false);
+    //response.say("Cuando llegue!");
+  }
 );
 
 app.intent("AMAZON.HelpIntent", {
@@ -70,40 +98,17 @@ app.intent("AMAZON.CancelIntent", {
 
 module.exports = app;
 
-/////Functions/////
 
-function getAPI(request, response) {
-    var number = request.slot('number');
-    var url = "";
-	var Linea = "A3642";
-	var respuesta = "Sin respuesta";
-    console.log("Numero de parada: ", number);
-    if(typeof number === 'undefined' || number === null) //For testing
-	{
-		number=parseInt("0270", 10);
-		console.log("Numero de parada cambiado: " + number);
-	}
+/*
+
+function(res){
+      var body = '';
   
-    url = 'http://apli.bizkaia.net/APPS/DANOK/TQWS/TQ.ASMX/GetPasoParadaMobile_JSON?callback=%22%22&strLinea=' + Linea + '&strParada=' + zeroPad(number);
-    console.log("URL: ", url);
-
-    return new Promise(function(resolve, reject) {
-     // Do async job
-        http.get(url, function(err, resp, body) {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(body);
-            }
-        })
-    })
-	
-	//response.say(respuesta).shouldEndSession(false);
-    //response.say("Cuando llegue!");
-  }
-
-function processBody(body){
-
+      res.on('data', function(chunk){
+          body += chunk;
+      });
+  
+      res.on('end', function(){
         //console.log("Got a response: ", body);
         body = body.replace("\"\"(","").replace(");","").replace(new RegExp("'", 'g'),"\"");
 
@@ -165,5 +170,7 @@ function processBody(body){
         }
         else
             console.log("Problemas con el servidor");
-  }
+      });
+  })
   
+  */
