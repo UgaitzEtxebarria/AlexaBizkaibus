@@ -49,7 +49,7 @@ app.intent('proximo_autobus',
 
     return new Promise(function(resolve, reject) {
      // Do async job
-        request.get(url, function(err, resp, body) {
+        http.get(url, function(err, resp, body) {
             if (err) {
                 reject(err);
             } else {
