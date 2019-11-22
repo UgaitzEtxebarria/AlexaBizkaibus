@@ -122,11 +122,12 @@ function processBody(xml, lineId, stopId){
 		  }
 		});
 		
-		response.say(respuesta).shouldEndSession(false);
+		return respuesta;
 		////////////
 	}
 	catch(e){
 		console.log("Error captado al llamar a la API: " + e);
+		return "Error al procesar la informacion";
 	}
   }
   
@@ -162,7 +163,7 @@ app.intent('proximo_autobus',
 	  var definitivo = processBody(xml, lineId, stopId);
 	  console.log("Respuesta definitiva: ");
 	  console.log(definitivo);
-	  response.say(definitivo);
+	  response.say(definitivo).shouldEndSession(false);
     })
 	.catch(err => {
       console.error("Fatal Error: ");
