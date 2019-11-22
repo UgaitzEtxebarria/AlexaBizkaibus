@@ -161,7 +161,7 @@ app.intent('proximo_autobus',
   function(request, response) {
 	getAPI(request, response)
 	.then(xml => {
-	  response.say("Tengo datos").shouldEndSession(false);
+	  response.say("Tengo datos");
       console.log("OK!: ");
 	  console.log(xml);
 	  console.log(lineId);
@@ -169,7 +169,7 @@ app.intent('proximo_autobus',
 	  var definitivo = processBody(xml, lineId, stopId);
 	  console.log("Respuesta definitiva: ");
 	  console.log(definitivo);
-	  response.say(definitivo).shouldEndSession(false);
+	  response.say(definitivo);
     })
 	.catch(err => {
       console.error("Fatal Error: ");
