@@ -38,7 +38,8 @@ function getAPI(request, response) {
 			http.get(url, 
 				function(body) 
 				{
-					console.log("A procesar: " + body);
+					console.log("A procesar: ");
+					console.log(body);
 					resolve(body);
 				}
 			).on('error', (e) => { reject('Got error: ${e.message}'); });
@@ -149,11 +150,17 @@ app.intent('proximo_autobus',
   function(request, response) {
 	getAPI(request, response)
 	.then(ok => {
-      console.log("OK!: " + ok)
+      console.log("OK!: ");
+	  console.log(ok);
+	  var definitivo = processBody();
+	  console.log("Respuesta definitiva: ");
+	  console.log(definitivo);
+	  response.say(definitivo);
     })
 	.catch(err => {
       console.error("Fatal Error: ");
 	  console.error(err);
+	  response.say(err;
     })
   }
 );
