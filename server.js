@@ -2,7 +2,7 @@
 
 var AlexaAppServer = require('alexa-app-server');
 
-var isDebug = true;
+var isDebug = false;
 
 var server = new AlexaAppServer({
   server_root: __dirname,     // Path to root
