@@ -18,9 +18,12 @@ app.launch(function (request, response) {
 
 
 app.error = function (exception, request, response) {
-  console.log("Exception : " + exception)
-  console.log("Request : " + request);
-  console.log("Response : " + response);
+  console.log("Exception : ");
+  console.log(exception);
+  console.log("Request : ");
+  console.log(request);
+  console.log("Response : ");
+  console.log(response);
   response.say('Ha ocurrido un error con la informacion deseada.');
 };
 
@@ -56,10 +59,83 @@ app.intent('proximo_autobus',
                 resolve(body);
             }
         })
-    }).then(response.say("Hola!").shouldEndSession(false));
+    }).then(
+	//////////////THEN PROCESS THE INFO/////////////////
+	var body = '';
+  
+      res.on('data', function(chunk){
+          body += chunk;
+      });
+  
+      res.on('end', function(){
+        //console.log("Got a response: ", body);
+        body = body.replace("\"\"(","").replace(");","").replace(new RegExp("'", 'g'),"\"");
+
+        //console.log("Cleaned: ", body);
+        var JSONResponse = JSON.parse(body);
+        //console.log("JSON: ", JSONResponse);
+
+        if (JSONResponse["STATUS"] == "OK")
+        {
+			
+            console.log("Esta OK!");
+            var xml  = JSONResponse["Resultado"];
+            console.log("resultado: ", xml);
+            
+            ///////XML query////
+
+            var extractedData = "";
+			
+            var parser = new xml2js.Parser();
+            parser.parseString(xml, function(err,result){
+              //Extract the value from the data element
+              extractedData = result['GetPasoParadaResult'];
+              //console.log(extractedData);
+              if(typeof extractedData["PasoParada"] !== 'undefined')
+              {
+                var found = false;
+				console.log("Hay autobuses en direccion a esta parada.");
+                
+				extractedData["PasoParada"].forEach(element => { 
+				  console.log("Elemento: ", element);
+				  console.log("Linea: " + element["linea"] + " - " + Linea);
+				  if(element["linea"] == Linea)
+				  {
+					console.log("Linea " + Linea + " encontrada."); 
+					found = true;
+					var minutos = element["e1"][0]["minutos"];
+					console.log("Tiempos: " + minutos);
+					respuesta = "La linea " + Linea + " llega a la parada " + number + " en " + minutos +  " minutos.";
+					console.log("Respuesta: " + respuesta);
+					//response.say(respuesta).shouldEndSession(true);
+				  }
+                });
+				
+				if(!found)
+				{
+					console.log("No se encuentra la linea " + Linea + ".");
+					respuesta = "La linea " + Linea + " no se encuentra en esta parada.";
+				}
+					
+              } 
+              else {
+                console.log("No hay buses en direccion a esta parada.");
+                respuesta = "No se esperan buses todavia en esta parada";
+              }
+            });
+			
+			response.say(respuesta).shouldEndSession(false);
+            ////////////
+        }
+        else
+            console.log("Problemas con el servidor");
+      });
+	
+	/////////////////////////
+	);
+	
 	//response.say(respuesta).shouldEndSession(false);
     //response.say("Cuando llegue!");
-
   }
 );
 
