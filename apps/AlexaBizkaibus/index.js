@@ -14,6 +14,8 @@ function zeroPad(num) {
 /////Functions/////
 
 function getAPI(request, response) {
+	try {
+		
     var number = request.slot('number');
     var url = "";
 	var Linea = "A3642";
@@ -41,10 +43,14 @@ function getAPI(request, response) {
 	
 	//response.say(respuesta).shouldEndSession(false);
     //response.say("Cuando llegue!");
+  	}
+	catch(e){
+		console.log("Error captado procesar la llamada a la API: " + e);
+	}
   }
 
 function processBody(body){
-
+	try{
         //console.log("Got a response: ", body);
         body = body.replace("\"\"(","").replace(");","").replace(new RegExp("'", 'g'),"\"");
 
@@ -106,6 +112,10 @@ function processBody(body){
         }
         else
             console.log("Problemas con el servidor");
+	}
+	catch(e){
+		console.log("Error captado al llamar a la API: " + e);
+	}
   }
   
 ////////////////
