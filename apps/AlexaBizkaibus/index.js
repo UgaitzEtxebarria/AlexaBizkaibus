@@ -35,9 +35,7 @@ function getAPI(request, response) {
 
 
 		return new Promise(function(resolve, reject) {
-			 // Do async job
-			 console.log("URL2: ", url);
-			 
+			 // Do async job			 
 			http.get(url, (resp) => {
 				let data = '';
 
@@ -159,14 +157,10 @@ app.intent('proximo_autobus',
       "El proximo bus en {-|number}"]
   },
   function(request, response) {
+	  response.say("Tengo respuesta");
 	getAPI(request, response)
 	.then(xml => {
-	  response.say("Tengo datos");
-      console.log("OK!: ");
-	  console.log(xml);
-	  console.log(lineId);
-	  console.log(stopId);
-	  var definitivo = processBody(xml, lineId, stopId);
+	  var definitivo = processBody(xml);
 	  console.log("Respuesta definitiva: ");
 	  console.log(definitivo);
 	  response.say(definitivo);
@@ -174,7 +168,7 @@ app.intent('proximo_autobus',
 	.catch(err => {
       console.error("Fatal Error: ");
 	  console.error(err);
-	  response.say(err);
+	  response.fail(err);
     })
   }
 );
