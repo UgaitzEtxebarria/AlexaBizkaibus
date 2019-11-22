@@ -34,8 +34,10 @@ function getAPI(request, response) {
      // Do async job
         http.get(url, function(err, resp, body) {
             if (err) {
+				console.log("Errorcito");
                 reject(err);
             } else {
+				console.log("A procesar");
                 resolve(body);
             }
         })
