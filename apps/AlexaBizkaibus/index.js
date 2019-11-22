@@ -55,7 +55,7 @@ function getAPI(request, response) {
 					//console.log("JSON: ", JSONResponse);
 
 					if (JSONResponse["STATUS"] == "OK")
-						resolve(JSONResponse["Resultado"]);
+						resolve(JSONResponse["Resultado"], Linea, number);
 					else
 						reject("No esta disponible");
 				  });
@@ -73,7 +73,7 @@ function getAPI(request, response) {
 	}
   }
 
-function processBody(xml){
+function processBody(xml, lineId, stopId){
 	try{
 		console.log("Processing body");
         
@@ -96,14 +96,14 @@ function processBody(xml){
 			
 			extractedData["PasoParada"].forEach(element => { 
 			  console.log("Elemento: ", element);
-			  console.log("Linea: " + element["linea"] + " - " + Linea);
-			  if(element["linea"] == Linea)
+			  console.log("Linea: " + element["linea"] + " - " + lineId);
+			  if(element["linea"] == lineId)
 			  {
 				console.log("Linea " + Linea + " encontrada."); 
 				found = true;
 				var minutos = element["e1"][0]["minutos"];
 				console.log("Tiempos: " + minutos);
-				respuesta = "La linea " + Linea + " llega a la parada " + number + " en " + minutos +  " minutos.";
+				respuesta = "La linea " + lineId + " llega a la parada " + stopId + " en " + minutos +  " minutos.";
 				console.log("Respuesta: " + respuesta);
 				//response.say(respuesta).shouldEndSession(true);
 			  }
@@ -156,10 +156,10 @@ app.intent('proximo_autobus',
   },
   function(request, response) {
 	getAPI(request, response)
-	.then(ok => {
+	.then((xml, lineId, stopId) => {
       console.log("OK!: ");
-	  console.log(ok);
-	  var definitivo = processBody(ok);
+	  console.log(xml);
+	  var definitivo = processBody(ok, lineId, stopId);
 	  console.log("Respuesta definitiva: ");
 	  console.log(definitivo);
 	  response.say(definitivo);
